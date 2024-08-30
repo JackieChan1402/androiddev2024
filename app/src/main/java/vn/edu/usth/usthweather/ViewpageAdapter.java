@@ -25,7 +25,7 @@ public class ViewpageAdapter extends FragmentStateAdapter {
             case 3:
                 return new Fragment4();
             default:
-                return new Fragment1();
+                return new ForecastFragment();
         }
     }
 
