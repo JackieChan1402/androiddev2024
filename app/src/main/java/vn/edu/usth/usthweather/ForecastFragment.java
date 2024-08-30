@@ -78,8 +78,35 @@ public class ForecastFragment extends Fragment {
         String text = "what's up!";
         textView.setText(text);
 
+        // Create a new LinearLayout
+        LinearLayout otherLayout = new LinearLayout(getContext());
+        otherLayout.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        otherLayout.setOrientation(LinearLayout.VERTICAL);
+        otherLayout.setVisibility(View.GONE);
+
+
+        // Create Edit text
+        EditText editText = new EditText(getContext());
+        editText.setHint("Here are a Space for you Writing.");
+        otherLayout.addView(editText);
+
         ImageView img = new ImageView(getContext());
         img.setImageResource(R.drawable.weather);
+
+        // Create a button
+        Button button = new Button(getContext());
+        button.setText("Click me, You will be come a Writer!");
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (otherLayout.getVisibility() == View.VISIBLE)
+                {
+                    otherLayout.setVisibility(View.GONE);
+                }else {
+                    otherLayout.setVisibility(View.VISIBLE);
+                }
+            }
+        });
 
         // Inflate the layout for this fragment
         FrameLayout view = new FrameLayout(getContext());
@@ -87,12 +114,15 @@ public class ForecastFragment extends Fragment {
         view.setBackgroundColor(Color.parseColor("#e5ebe7"));
 
         LinearLayout linearLayout = new LinearLayout(getContext());
+        linearLayout.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        linearLayout.setBackgroundColor(Color.parseColor("#2ea0c4"));
         linearLayout.setOrientation(LinearLayout.VERTICAL);
 
         view.addView(linearLayout);
         linearLayout.addView(img);
-
         linearLayout.addView(textView);
+        linearLayout.addView(button);
+        linearLayout.addView(otherLayout);
 
         return view;
     }

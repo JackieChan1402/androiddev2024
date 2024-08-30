@@ -32,10 +32,9 @@ import com.google.android.material.navigation.NavigationBarView;
 public class WeatherActivity extends AppCompatActivity {
 
     private String TAG = "Application Case";
-    private ForecastFragment forecastFragment;
+//    private ForecastFragment forecastFragment;
     private ViewPager2 viewPager;
     private BottomNavigationView bottomNavigationView;
-    private EditText editText;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -43,88 +42,78 @@ public class WeatherActivity extends AppCompatActivity {
         Log.i(TAG,"___Created___");
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_weather);
-//
-//        Button add_button = new Button(this);
-//        add_button.setText("Click on this button, You will be a writer");
-//        linearLayout.addView(add_button);
-//        add_button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                TextView textView = new TextView(getApplicationContext());
-//                textView.setText(editText.getText());
-//                linearLayout.addView(textView);
-//            }
-//        });
 
-//        viewPager = findViewById(R.id.View_page);
-//        bottomNavigationView = findViewById(R.id.bottom_navigation);
-//
-//        ViewpageAdapter adapterpage = new ViewpageAdapter(this);
-//        viewPager.setAdapter( adapterpage );
+        viewPager = findViewById(R.id.View_page);
+        bottomNavigationView = findViewById(R.id.bottom_navigation);
 
-//        viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
-//            @Override
-//            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-//                super.onPageScrolled(position, positionOffset, positionOffsetPixels);
-//            }
+        ViewpageAdapter adapterPage = new ViewpageAdapter(getSupportFragmentManager(),getLifecycle());
+        viewPager.setAdapter(adapterPage);
 
-//            @Override
-//            public void onPageSelected(int position) {
-//                switch (position){
-//                    case 0:
-//                        bottomNavigationView.getMenu().findItem(R.id.menu_tab_1).setChecked(true);
-//                        break;
-//                    case 1:
-//                        bottomNavigationView.getMenu().findItem(R.id.menu_tab_2).setChecked(true);
-//                        break;
-//                    case 2:
-//                        bottomNavigationView.getMenu().findItem(R.id.menu_tab_3).setChecked(true);
-//                        break;
-//                    case 3:
-//                        bottomNavigationView.getMenu().findItem(R.id.menu_tab_4).setChecked(true);
-//                        break;
-//                }
-//
-//            }
-//
-//            @Override
-//            public void onPageScrollStateChanged(int state) {
-//                super.onPageScrollStateChanged(state);
-//            }
+        viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                super.onPageScrolled(position, positionOffset, positionOffsetPixels);
+            }
 
-//        });
-//        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-//            @Override
-//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//                int itemId = item.getItemId();
-//                if (itemId == R.id.menu_tab_1) {
-//                    viewPager.setCurrentItem(0);
-//                    return false;
-//                } else if (itemId == R.id.menu_tab_2) {
-//                    viewPager.setCurrentItem(1);
-//                    return false;
-//                } else if (itemId == R.id.menu_tab_3) {
-//                    viewPager.setCurrentItem(2);
-//                    return false;
-//                } else if (itemId == R.id.menu_tab_4) {
-//                    viewPager.setCurrentItem(3);
-//                    return false;
-//                }
-//                return true;
-//                }
-//
-//        });
+            @Override
+            public void onPageSelected(int position) {
+               switch (position)
+               {
+                   case 0:
+                       bottomNavigationView.getMenu().findItem(R.id.menu_tab_1).setChecked(true);
+                       break;
+                   case 1:
+                       bottomNavigationView.getMenu().findItem(R.id.menu_tab_2).setChecked(true);
+                       break;
+                   case 2:
+                       bottomNavigationView.getMenu().findItem(R.id.menu_tab_3).setChecked(true);
+                       break;
+                   case 3:
+                       bottomNavigationView.getMenu().findItem(R.id.menu_tab_4).setChecked(true);
+                       break;
+               }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+                super.onPageScrollStateChanged(state);
+            }
+        });
+        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                if (item.getItemId() == R.id.menu_tab_1) {
+                    viewPager.setCurrentItem(0, true); // Switch to the first fragment
+                    return true;
+                }
+                if (item.getItemId() == R.id.menu_tab_2) {
+                    viewPager.setCurrentItem(1, true); // Switch to the first fragment
+                    return true;
+                }
+                if (item.getItemId() == R.id.menu_tab_3) {
+                    viewPager.setCurrentItem(2, true); // Switch to the first fragment
+                    return true;
+                }
+                if (item.getItemId() == R.id.menu_tab_4) {
+                    viewPager.setCurrentItem(3, true); // Switch to the first fragment
+                    return true;
+                }
+                return false;
+            }
+        });
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        // Create a new Fragment to be placed in the activity
-        ForecastFragment firstFragment = new ForecastFragment();
 
-        // add the fragment to the "containner" FrameLayout
-        getSupportFragmentManager().beginTransaction().add(R.id.main, firstFragment).commit();
+
+//        // Create a new Fragment to be placed in the activity
+//        ForecastFragment firstFragment = new ForecastFragment();
+//
+//        // add the fragment to the "containner" FrameLayout
+//        getSupportFragmentManager().beginTransaction().add(R.id.main, firstFragment).commit();
     }
 
 

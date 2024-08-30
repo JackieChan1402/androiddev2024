@@ -7,17 +7,18 @@
     android:layout_height="match_parent"
     tools:context=".WeatherActivity">
 
-    <androidx.viewpager.widget.ViewPager
+    <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/View_page"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/bottom_navigation"
-        tools:ignore="SpeakableTextPresentCheck" />
+        />
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:background="@android:color/holo_blue_dark"
         app:itemTextColor="@color/color_navoigation"
         app:itemIconTint="@color/color_navoigation"
         app:labelVisibilityMode="labeled"
