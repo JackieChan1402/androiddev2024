@@ -12,5 +12,5 @@ Student Info
 
 * Name: Vu Thanh Long
 * ID: BA12-110
-* Group ID: *Your Group ID here*
-* Project Name: *Your Project Name here*
+* Group ID: 11
+* Project Name: Github Browser
