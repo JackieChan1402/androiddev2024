@@ -17,7 +17,7 @@ public class ViewpageAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         switch (position) {
             case 0:
-                return new ForecastFragment();
+                return new WeatherAndForecastFragment();
             case 1:
                 return new Fragment2();
             case 2:
@@ -25,7 +25,7 @@ public class ViewpageAdapter extends FragmentStateAdapter {
             case 3:
                 return new Fragment4();
             default:
-                return new ForecastFragment();
+                return new WeatherAndForecastFragment();
         }
     }
 

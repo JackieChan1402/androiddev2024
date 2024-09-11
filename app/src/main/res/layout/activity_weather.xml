@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/white"
     tools:context=".WeatherActivity">
 
     <androidx.viewpager2.widget.ViewPager2
@@ -19,24 +20,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@android:color/holo_blue_dark"
+        android:background="@color/white"
         app:itemTextColor="@color/color_navoigation"
         app:itemIconTint="@color/color_navoigation"
         app:labelVisibilityMode="labeled"
-        app:menu="@menu/menu_navigation" />
-
-
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentContainerView"
-        android:name="vn.edu.usth.usthweather.WeatherFragment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        app:menu="@menu/menu_navigation"
         />
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentContainerView2"
-        android:name="vn.edu.usth.usthweather.ForecastFragment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        />
-</LinearLayout>
+</RelativeLayout>
