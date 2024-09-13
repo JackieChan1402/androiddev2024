@@ -3,15 +3,46 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@drawable/frame9"
     tools:context=".Fragment1">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:textColor="@android:color/black"
-        android:textSize="30sp"
-        android:text="Tab 1" />
+        android:padding="@dimen/padding"
+        >
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/vietnam"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/text_weather2"/>
+        <ImageView
+            android:id="@+id/image_weather"
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/weather_image"
+            ></ImageView>
+
+        <TextView
+            android:id="@+id/text_weather1"
+            android:layout_width="@dimen/text_width"
+            android:layout_height="@dimen/text_height"
+            android:layout_alignParentLeft="true"
+            android:text="Sun?Rain"
+            android:textSize="@dimen/text_size_title"
+            android:textStyle="italic"></TextView>
+        <TextView
+            android:id="@+id/text_weather2"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/text_height"
+            android:text="Việt Nam"
+            android:textSize="@dimen/text_size_title"
+            android:layout_alignParentRight="true"
+            android:textStyle="bold">
+
+        </TextView>
+    </RelativeLayout>
 
 </RelativeLayout>

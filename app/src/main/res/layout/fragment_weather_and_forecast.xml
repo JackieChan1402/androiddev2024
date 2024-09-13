@@ -15,42 +15,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-            <RelativeLayout
+
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/fragmentContainerView"
+                android:name="vn.edu.usth.usthweather.Fragment1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/vietnam"
-                    android:layout_alignParentRight="true"/>
-                <ImageView
-                    android:id="@+id/image_weather"
-                    android:layout_width="match_parent"
-                    android:layout_height="500dp"
-                    android:layout_centerInParent="true"
-                    android:src="@drawable/weather_image"
-                    ></ImageView>
+                android:layout_height="wrap_content" />
 
-                <TextView
-                    android:id="@+id/text_weather1"
-                    android:layout_width="@dimen/text_width"
-                    android:layout_height="@dimen/text_height"
-                    android:layout_alignParentLeft="true"
-                    android:text="Sun?Rain"
-                    android:textSize="@dimen/text_size_title"
-                    android:textStyle="italic"></TextView>
-                <TextView
-                    android:id="@+id/text_weather2"
-                    android:layout_width="@dimen/text_width"
-                    android:layout_height="@dimen/text_height"
-                    android:text="Việt Nam"
-                    android:textSize="@dimen/text_size_title"
-                    android:layout_alignParentRight="true"
-                    android:textStyle="bold">
-
-                </TextView>
-            </RelativeLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
