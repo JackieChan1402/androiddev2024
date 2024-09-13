@@ -22,8 +22,6 @@ public class ViewpageAdapter extends FragmentStateAdapter {
                 return new Fragment2();
             case 2:
                 return new Fragment3();
-            case 3:
-                return new Fragment4();
             default:
                 return new WeatherAndForecastFragment();
         }
@@ -31,6 +29,6 @@ public class ViewpageAdapter extends FragmentStateAdapter {
 
     @Override
     public int getItemCount() {
-        return 4;
+        return 3;
     }
 }

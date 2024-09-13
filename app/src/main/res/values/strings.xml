@@ -1,5 +1,25 @@
 <resources>
-    <string name="app_name">USTH Weather</string>
+    <string name="app_name" translatable="false">USTH Weather</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+    <string name="VietNam">Vietnam\'s Weather</string>
+    <string name="France">France\'s Weather</string>
+    <string name="China">Chines Weather</string>
+
+    <string name="Monday" >Mon</string>
+    <string name="Tuesday" >Tus</string>
+    <string name="Wednesday" >Wed</string>
+    <string name="Thurday" >Thur</string>
+    <string name="Friday">Fri</string>
+    <string name="Satuday" >Sat</string>
+    <string name="Sunday" >Sun</string>
+
+    <string name="Sunny">Sunny</string>
+    <string name="Cloudy" >Cloudy</string>
+    <string name="Rain" >Rainly</string>
+    <string name="Thurder">Thunder</string>
+    <string name="Snow">Snowly</string>
+    <string name="Stom">Stom</string>
+    <string name="ThunderStom">Thunder Stom</string>
+
 </resources>

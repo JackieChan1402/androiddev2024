@@ -68,9 +68,6 @@ public class WeatherActivity extends AppCompatActivity {
                    case 2:
                        bottomNavigationView.getMenu().findItem(R.id.menu_tab_3).setChecked(true);
                        break;
-                   case 3:
-                       bottomNavigationView.getMenu().findItem(R.id.menu_tab_4).setChecked(true);
-                       break;
                }
             }
 
@@ -94,10 +91,6 @@ public class WeatherActivity extends AppCompatActivity {
                     viewPager.setCurrentItem(2, true); // Switch to the first fragment
                     return true;
                 }
-                if (item.getItemId() == R.id.menu_tab_4) {
-                    viewPager.setCurrentItem(3, true); // Switch to the first fragment
-                    return true;
-                }
                 return false;
             }
         });
@@ -107,11 +100,7 @@ public class WeatherActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
-
     }
-
-
     @Override
     protected void onStart() {
         super.onStart();
