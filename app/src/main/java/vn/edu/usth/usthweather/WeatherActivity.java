@@ -1,7 +1,11 @@
 package vn.edu.usth.usthweather;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.media.MediaPlayer;
 import android.nfc.Tag;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,6 +20,8 @@ import android.widget.TextView;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -29,12 +35,18 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
 public class WeatherActivity extends AppCompatActivity {
 
     private String TAG = "Application Case";
-//    private ForecastFragment forecastFragment;
     private ViewPager2 viewPager;
     private BottomNavigationView bottomNavigationView;
+    private MediaPlayer mediaPlayer;
+    private static final int REQUEST_WRITE_EXTERNAL_STORAGE = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -100,7 +112,51 @@ public class WeatherActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_WRITE_EXTERNAL_STORAGE);
+            Log.i(TAG, "My phone not append to save music.mp3");
+        }
+        else {
+            extractFileToExternalStorage();
+            Log.i(TAG, "My phone able to save music.mp3");
+
+        }
+        mediaPlayer = MediaPlayer.create(this,R.raw.weather_melody);
+        mediaPlayer.setLooping(true);
+        mediaPlayer.start();
     }
+    private void extractFileToExternalStorage() {
+        try {
+            InputStream inputStream = getResources().openRawResource(R.raw.weather_melody);
+            File file = new File(Environment.getExternalStorageDirectory(), "music.mp3");
+            FileOutputStream outputStream = new FileOutputStream(file);
+            byte[] buffer = new byte[1024];
+            int length;
+            while ((length = inputStream.read(buffer)) > 0) {
+                outputStream.write(buffer, 0, length);
+                isFileExists("music.mp3");
+            }
+            inputStream.close();
+            outputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQUEST_WRITE_EXTERNAL_STORAGE && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            extractFileToExternalStorage();
+        }
+
+    }
+    private boolean isFileExists(String fileName)
+    {
+        File file = new File(Environment.getExternalStorageDirectory(), fileName);
+        return file.exists();
+    }
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -110,12 +166,14 @@ public class WeatherActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+        mediaPlayer.pause();
         Log.i(TAG,"___Paused___");
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        mediaPlayer.start();
         Log.i(TAG,"___Resumed___");
     }
 
@@ -128,6 +186,8 @@ public class WeatherActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        mediaPlayer.stop();
+        mediaPlayer.release();
         Log.i(TAG,"___Destroyed___");
     }
 }
