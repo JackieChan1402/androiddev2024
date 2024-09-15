@@ -1,6 +1,7 @@
 package vn.edu.usth.usthweather;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
 import android.nfc.Tag;
@@ -16,10 +17,12 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
@@ -106,12 +109,9 @@ public class WeatherActivity extends AppCompatActivity {
                 return false;
             }
         });
+        Toolbar toolbar = findViewById(R.id.tool_bar_view);
+        setSupportActionBar(toolbar);
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_WRITE_EXTERNAL_STORAGE);
             Log.i(TAG, "My phone not append to save music.mp3");
@@ -155,6 +155,29 @@ public class WeatherActivity extends AppCompatActivity {
     {
         File file = new File(Environment.getExternalStorageDirectory(), fileName);
         return file.exists();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.toolbar, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+      if (item.getItemId() == R.id.refesh_button)
+      {
+          Toast.makeText(getApplicationContext(),R.string.refesh, Toast.LENGTH_SHORT).show();
+          return true;
+      }
+      if (item.getItemId() == R.id.newActivity)
+      {
+          Toast.makeText(getApplicationContext(),R.string.create, Toast.LENGTH_SHORT).show();
+          Intent intent = new Intent(WeatherActivity.this, PrefActivity.class);
+          startActivity(intent);
+          return true;
+      }
+      return super .onOptionsItemSelected(item);
     }
 
     @Override

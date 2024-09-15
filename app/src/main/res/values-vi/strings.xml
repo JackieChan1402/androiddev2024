@@ -17,4 +17,8 @@
     <string name="Snow">Tuyết</string>
     <string name="Stom">Bão</string>
     <string name="ThunderStom">Bão lớn</string>
+    <string name="refesh">Làm mới</string>
+    <string name="nothing">Không có gì ở trang này, làm ơn hãy trở lại trang trước.</string>
+    <string name="back">Trở lại</string>
+    <string name="create">Mở PrefActivity</string>
 </resources>
