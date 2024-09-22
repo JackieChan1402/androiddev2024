@@ -21,4 +21,6 @@
     <string name="nothing">Không có gì ở trang này, làm ơn hãy trở lại trang trước.</string>
     <string name="back">Trở lại</string>
     <string name="create">Mở PrefActivity</string>
+    <string name="networkcomplete">Yêu cầu mạng đã hoàn tất</string>
+
 </resources>

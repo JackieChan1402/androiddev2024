@@ -7,6 +7,8 @@ import android.media.MediaPlayer;
 import android.nfc.Tag;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -50,6 +52,7 @@ public class WeatherActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
     private MediaPlayer mediaPlayer;
     private static final int REQUEST_WRITE_EXTERNAL_STORAGE = 1;
+    private Handler handler;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -124,6 +127,8 @@ public class WeatherActivity extends AppCompatActivity {
         mediaPlayer = MediaPlayer.create(this,R.raw.weather_melody);
         mediaPlayer.setLooping(true);
         mediaPlayer.start();
+
+        handler = new Handler(Looper.getMainLooper());
     }
     private void extractFileToExternalStorage() {
         try {
@@ -168,6 +173,7 @@ public class WeatherActivity extends AppCompatActivity {
       if (item.getItemId() == R.id.refesh_button)
       {
           Toast.makeText(getApplicationContext(),R.string.refesh, Toast.LENGTH_SHORT).show();
+          simulateNetWorkRequest();
           return true;
       }
       if (item.getItemId() == R.id.newActivity)
@@ -178,6 +184,27 @@ public class WeatherActivity extends AppCompatActivity {
           return true;
       }
       return super .onOptionsItemSelected(item);
+    }
+
+    private void simulateNetWorkRequest(){
+        new Thread(new Thread() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(3000);
+                }
+                catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(WeatherActivity.this, R.string.networkcomplete,Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+
+        }).start();
     }
 
     @Override
