@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
 import android.nfc.Tag;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -52,7 +53,6 @@ public class WeatherActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
     private MediaPlayer mediaPlayer;
     private static final int REQUEST_WRITE_EXTERNAL_STORAGE = 1;
-    private Handler handler;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -128,7 +128,7 @@ public class WeatherActivity extends AppCompatActivity {
         mediaPlayer.setLooping(true);
         mediaPlayer.start();
 
-        handler = new Handler(Looper.getMainLooper());
+
     }
     private void extractFileToExternalStorage() {
         try {
@@ -173,7 +173,7 @@ public class WeatherActivity extends AppCompatActivity {
       if (item.getItemId() == R.id.refesh_button)
       {
           Toast.makeText(getApplicationContext(),R.string.refesh, Toast.LENGTH_SHORT).show();
-          simulateNetWorkRequest();
+         new NetworkRequestTask().execute();
           return true;
       }
       if (item.getItemId() == R.id.newActivity)
@@ -186,25 +186,24 @@ public class WeatherActivity extends AppCompatActivity {
       return super .onOptionsItemSelected(item);
     }
 
-    private void simulateNetWorkRequest(){
-        new Thread(new Thread() {
-            @Override
-            public void run() {
-                try {
-                    Thread.sleep(3000);
-                }
-                catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                handler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(WeatherActivity.this, R.string.networkcomplete,Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
+    private class NetworkRequestTask extends AsyncTask<Void,Void,String> {
 
-        }).start();
+        @Override
+        protected String doInBackground(Void... voids) {
+            try {
+                Thread.sleep(4000);
+            }
+            catch (InterruptedException e)
+            {
+                e.printStackTrace();
+            }
+            return getString(R.string.networkcomplete);
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            Toast.makeText(WeatherActivity.this, s,Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
